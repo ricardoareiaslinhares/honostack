@@ -1,0 +1,18 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: hono-stack
+    image: hono-stack:dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - honostack_cache:/deno-dir
+    environment:
+      DENO_DIR: /deno-dir
+    restart: unless-stopped
+
+volumes:
+  honostack_cache:
