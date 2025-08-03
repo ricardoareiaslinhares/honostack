@@ -1,23 +1,36 @@
-import { unzip } from "https://deno.land/x/zip@v1.2.5/mod.ts";
-import { ensureDir } from "https://deno.land/std@0.214.0/fs/ensure_dir.ts";
+import { ZipReader, BlobReader } from "jsr:@zip-js/zip-js";
 
-const dest = Deno.args[0] ?? "honostack-app";
-const repo = "ricardoareiasgit linhares/honostack"; // ← replace with your GitHub user/repo if different
+import { ensureDir } from "https://deno.land/std@0.214.0/fs/ensure_dir.ts";
+import { join, dirname } from "https://deno.land/std@0.214.0/path/mod.ts";
+
+const target = Deno.args[0] ?? "honostack-app";
+const repo = "ricardoareiaslinhares/honostack";
 const branch = "main";
 const zipUrl = `https://github.com/${repo}/archive/refs/heads/${branch}.zip`;
 
-console.log(`🚀 Downloading honostack template from ${repo}...`);
-const zipBytes = new Uint8Array(await (await fetch(zipUrl)).arrayBuffer());
+console.log(`📦 Downloading template from ${repo}@${branch}...`);
+const res = await fetch(zipUrl);
+const zipBlob = await res.blob();
 
-await ensureDir(dest);
-await Deno.writeFile("honostack.zip", zipBytes);
+console.log("📂 Extracting files...");
+const zipReader = new ZipReader(new BlobReader(zipBlob));
+const entries = await zipReader.getEntries();
 
-console.log(`📦 Extracting template...`);
-await unzip("honostack.zip", ".");
+for (const entry of entries) {
+  if (entry.directory) continue;
 
-await Deno.rename(`honostack-${branch}/template`, dest);
-await Deno.remove("honostack.zip");
-await Deno.remove(`honostack-${branch}`, { recursive: true });
+  const relativePath = entry.filename.replace(`honostack-${branch}/template/`, "");
+  if (relativePath === entry.filename) continue;
 
-console.log(`✅ Done! Project created at ${dest}`);
-console.log(`👉 cd ${dest} && deno task start`);
+  const outputPath = join(target, relativePath);
+  await ensureDir(dirname(outputPath));
+
+  const file = await Deno.create(outputPath);
+  await entry.getData?.(file.writable);
+}
+
+await zipReader.close();
+
+console.log(`✅ Done! Project scaffolded into "${target}"`);
+console.log(`cd ${target} && docker compose up`);
+console.log("Happy coding");
