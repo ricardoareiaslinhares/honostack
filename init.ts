@@ -26,7 +26,7 @@ for (const entry of entries) {
   await ensureDir(dirname(outputPath));
 
   const file = await Deno.create(outputPath);
-  await entry.getData?.(file.writable);
+  await entry.getData?.(file.writable, {});
 }
 
 await zipReader.close();
@@ -34,3 +34,4 @@ await zipReader.close();
 console.log(`✅ Done! Project scaffolded into "${target}"`);
 console.log(`cd ${target} && docker compose up`);
 console.log("Happy coding");
+Deno.exit(0);
