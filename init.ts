@@ -1,9 +1,8 @@
-// init.ts
 import { unzip } from "https://deno.land/x/zip@v1.2.5/mod.ts";
 import { ensureDir } from "https://deno.land/std@0.214.0/fs/ensure_dir.ts";
 
 const dest = Deno.args[0] ?? "honostack-app";
-const repo = "ricardoareiaslinhares/honostack"; // ← replace with your GitHub user/repo if different
+const repo = "ricardoareiasgit linhares/honostack"; // ← replace with your GitHub user/repo if different
 const branch = "main";
 const zipUrl = `https://github.com/${repo}/archive/refs/heads/${branch}.zip`;
 
