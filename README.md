@@ -23,10 +23,4 @@ If you don’t use Docker, you’ll need to manually install:
 > All client-side code must live inside the /client folder.
 
 ## Production
-Use the default Dockerfile
-
-**Alternative**
-
-If development you already build the CSS and client bundle:
-- Also commit the generated files (e.g., public/styles.css, public/client.bundle.js) to GitHub
-- Streamline production directly from your repo
+Use the default Dockerfile, it already builds the css and the client side js bundle.
