@@ -3,16 +3,32 @@ FROM denoland/deno:debian-2.4.3
 WORKDIR /app
 ENV DENO_DIR=/deno-dir
 
+# Install system tools
 RUN apt-get update && \
-    apt-get install -y curl bash watchman && \
-    curl -L https://github.com/watchexec/watchexec/releases/download/v2.3.2/watchexec-2.3.2-aarch64-unknown-linux-musl.deb \
-    -o /tmp/watchexec.deb && \
+    apt-get install -y curl bash watchman
+
+# Detect architecture and set URLs off watchexec and tailwindcss dynamically
+RUN ARCH=$(uname -m) && \
+    case "$ARCH" in \
+    x86_64) \
+    TAILWIND_URL="https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.11/tailwindcss-linux-x64" && \
+    WATCHEXEC_URL="https://github.com/watchexec/watchexec/releases/download/v2.3.2/watchexec-2.3.2-x86_64-unknown-linux-musl.deb" ;; \
+    aarch64) \
+    TAILWIND_URL="https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.11/tailwindcss-linux-arm64" && \
+    WATCHEXEC_URL="https://github.com/watchexec/watchexec/releases/download/v2.3.2/watchexec-2.3.2-aarch64-unknown-linux-musl.deb" ;; \
+    *) \
+    echo "❌ Unsupported architecture: $ARCH" && \
+    echo "🛠 Please update Dockerfile.dev with the proper Tailwind and Watchexec binaries for: $ARCH" && \
+    echo "🔗 https://github.com/tailwindlabs/tailwindcss/releases" && \
+    echo "🔗 https://github.com/watchexec/watchexec/releases" && \
+    exit 1 ;; \
+    esac && \
+    # Install TailwindCSS
+    curl -L "$TAILWIND_URL" -o /usr/bin/tailwindcss && chmod +x /usr/bin/tailwindcss && \
+    # Install Watchexec
+    curl -L "$WATCHEXEC_URL" -o /tmp/watchexec.deb && \
     apt install -y /tmp/watchexec.deb && \
     rm /tmp/watchexec.deb
-
-RUN curl -L https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.11/tailwindcss-linux-arm64 \
-    -o /usr/bin/tailwindcss && \
-    chmod +x /usr/bin/tailwindcss
 
 COPY deno.jsonc ./
 

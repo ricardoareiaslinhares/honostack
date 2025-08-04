@@ -19,8 +19,14 @@ const entries = await zipReader.getEntries();
 for (const entry of entries) {
   if (entry.directory) continue;
 
-  const relativePath = entry.filename.replace(`honostack-${branch}/template/`, "");
-  if (relativePath === entry.filename) continue;
+  const isTemplateFile = entry.filename.startsWith(`honostack-${branch}/template/`);
+  const isRootReadme = entry.filename === `honostack-${branch}/README.md`;
+
+  if (!isTemplateFile && !isRootReadme) continue;
+
+  const relativePath = isTemplateFile
+    ? entry.filename.replace(`honostack-${branch}/template/`, "")
+    : "README.md";
 
   const outputPath = join(target, relativePath);
   await ensureDir(dirname(outputPath));
@@ -33,5 +39,5 @@ await zipReader.close();
 
 console.log(`✅ Done! Project scaffolded into "${target}"`);
 console.log(`cd ${target} && docker compose up`);
-console.log("Happy coding");
+console.log("😎 Happy coding");
 Deno.exit(0);
