@@ -30,6 +30,6 @@ RUN ARCH=$(uname -m) && \
     apt install -y /tmp/watchexec.deb && \
     rm /tmp/watchexec.deb
 
-COPY deno.jsonc ./
+COPY ./app/deno.jsonc ./
 
 CMD ["task", "start"]

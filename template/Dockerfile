@@ -29,6 +29,6 @@ ENV DENO_DIR=/deno-dir
 COPY --from=build /app /app
 COPY --from=build /deno-dir /deno-dir
 
-EXPOSE 8000
+EXPOSE 8001
 
 CMD ["run", "--allow-net", "--allow-read", "src/main.tsx"]

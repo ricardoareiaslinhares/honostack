@@ -6,13 +6,28 @@ services:
     container_name: hono-stack
     image: hono-stack:dev
     ports:
-      - "8000:8000"
+      - "8001:8001"
     volumes:
-      - .:/app
+      - ./app:/app
       - honostack_cache:/deno-dir
     environment:
       DENO_DIR: /deno-dir
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    container_name: pocketbase
+    image: pocketbase:dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./db:/pb/pb_data
     restart: unless-stopped
 
 volumes:
   honostack_cache:
+  pb_data:

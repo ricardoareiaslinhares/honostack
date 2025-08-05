@@ -1,13 +1,14 @@
 {
   "imports": {
-    "hono": "jsr:@hono/hono@^4.8.12"
+    "hono": "jsr:@hono/hono@^4.8.12",
+    "pocketbase": "jsr:@pocketbase/js@^0.29.1"
   },
   "tasks": {
     "build:client": "deno bundle --platform browser --output public/static/bundle.js src/client/*",
     "build:css": "tailwindcss -i ./src/layout.css -o ./public/static/styles.css",
     "watch:client": "watchexec -e ts,tsx --restart --clear -- deno task build:client",
     "watch:css": "tailwindcss -i ./src/layout.css -o ./public/static/styles.css --watch",
-    "dev": "deno run --watch --allow-net --allow-read=./src,./public src/main.tsx",
+    "dev": "deno run --watch --allow-net --allow-env --allow-read=./src,./public src/main.tsx",
     "start": "bash -c 'deno task build:css && deno task watch:css & deno task watch:client & deno task dev'"
   },
   "compilerOptions": {
