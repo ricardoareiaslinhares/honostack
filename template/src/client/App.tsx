@@ -8,6 +8,6 @@ renderOnElement("counter", <Counter />);
 renderOnElement(
   "denocode",
   <div class="w-fit">
-    <CodeBlock code="deno run -A https://deno.land/x/honostack@v0.1.6/init.ts aapp_name" />
+    <CodeBlock code="deno run -A https://deno.land/x/honostack@v0.1.6/init.ts appName" />
   </div>,
 );
