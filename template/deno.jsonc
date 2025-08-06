@@ -7,8 +7,9 @@
     "watch:client": "watchexec -e ts,tsx --restart --clear -- deno task build:client",
     "build:css": "tailwindcss -i ./src/layout.css -o ./public/static/styles.css",
     "watch:css": "watchexec -e ts,tsx --restart --clear -- deno task build:css",
-    "dev": "deno run --watch --allow-net --allow-read=./src,./public src/main.tsx",
-    "start": "bash -c 'deno task build:css && deno task watch:css & deno task watch:client & deno task dev'"
+    "dev": "deno run --watch --allow-net --allow-env --allow-read=./src,./public src/main.tsx",
+    "start": "bash -c 'deno task build:css && deno task watch:css & deno task watch:client & deno task dev'",
+    "production": "deno run --allow-net --allow-env --allow-read src/main.tsx"
   },
   "compilerOptions": {
     "jsx": "react-jsx",

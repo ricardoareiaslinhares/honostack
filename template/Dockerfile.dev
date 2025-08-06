@@ -32,4 +32,4 @@ RUN ARCH=$(uname -m) && \
 
 COPY deno.jsonc ./
 
-CMD ["task", "start"]
+CMD ["deno", "task", "production"]

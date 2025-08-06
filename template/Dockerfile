@@ -24,9 +24,13 @@ WORKDIR /app
 
 ENV DENO_DIR=/deno-dir
 
-COPY --from=build /app /app
+COPY --from=build /app/public /app/public
+COPY --from=build /app/src /app/src
+COPY --from=build /app/Dockerfile /app/Dockerfile
+COPY --from=build /app/deno.jsonc /app/deno.jsonc
+COPY --from=build /app/deno.lock /app/deno.lock
 COPY --from=build /deno-dir /deno-dir
 
 EXPOSE 8000
 
-CMD ["run", "--allow-net", "--allow-read", "src/main.tsx"]
+CMD ["deno", "task", "production"]

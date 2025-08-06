@@ -1,5 +1,5 @@
-import { Link } from "../ui/Link.tsx";
-import { CardFeature } from "./CardFeature.tsx";
+import { Link } from "../client/ui/Link.tsx";
+import { CardFeature } from "../client/components/CardFeature.tsx";
 
 export const Header = () => (
   <header class="sticky top-0 z-50 w-full py-6 px-4 md:px-12 flex justify-between items-center border-b border-gray-200 dark:border-neutral-700 bg-white dark:bg-neutral-900">
@@ -26,6 +26,9 @@ export const Hero = () => (
     <p class="text-lg text-gray-600 dark:text-neutral-300 max-w-xl mx-auto mb-8">
       A minimalist Deno + Hono + JSX + Tailwind starter packed in Docker. Ship faster with
       simplicity and performance.
+      <br />
+      <br />
+      In development...
     </p>
     <Link href="#get-started" variant="solid">
       Get Started
