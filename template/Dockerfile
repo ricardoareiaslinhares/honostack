@@ -17,7 +17,7 @@ RUN apt-get update && \
 COPY . .
 
 # Bundle client and Tailwind
-RUN deno bundle --platform browser --output public/static/bundle.js src/client/* 
+RUN deno bundle --platform browser --output public/static/bundle.js src/client/App.tsx
 RUN npx @tailwindcss/cli  -i ./src/layout.css -o ./public/static/styles.css
 
 FROM denoland/deno:2.4.3
