@@ -5,8 +5,7 @@ WORKDIR /app
 ENV DENO_DIR=/deno-dir
 COPY deno.jsonc ./  
 
-COPY src/main.tsx .      
-
+COPY . .
 RUN deno cache src/main.tsx
 
 # Install Tailwind
@@ -14,7 +13,6 @@ RUN apt-get update && \
     apt-get install -y curl unzip nodejs npm watchman && \
     npm install tailwindcss @tailwindcss/cli
 
-COPY . .
 
 # Bundle client and Tailwind
 RUN deno bundle --platform browser --output public/static/bundle.js src/client/App.tsx
