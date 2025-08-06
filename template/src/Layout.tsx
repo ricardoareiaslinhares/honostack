@@ -1,6 +1,6 @@
 import { FC } from "hono/jsx";
-import { Header } from "./components/Landing.tsx";
-import { Footer } from "./components/Footer.tsx";
+import { Header } from "./client/components/Landing.tsx";
+import { Footer } from "./client/components/Footer.tsx";
 
 export const Layout: FC = (props) => (
   <html>

@@ -1,7 +1,7 @@
 import { Context, Hono } from "hono";
 import { serveStatic } from "hono/deno";
 import { Layout } from "./Layout.tsx";
-import { Features, Hero, Stack } from "./components/Landing.tsx";
+import { Features, Hero, Stack } from "./client/components/Landing.tsx";
 
 const app = new Hono();
 app.use("/static/*", serveStatic({ root: "./public" }));
