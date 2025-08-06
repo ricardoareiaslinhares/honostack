@@ -30,9 +30,7 @@ export const Hero = () => (
       <br />
       In development...
     </p>
-    <Link href="#get-started" variant="solid">
-      Get Started
-    </Link>
+    <div class="flex justify-center items-center" id="denocode"></div>
   </section>
 );
 
