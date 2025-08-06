@@ -1,4 +1,4 @@
-# ⚡ Deno + Hono + JSX + Tailwind App (with Docker)
+# 🔥 Deno + Hono + JSX + Tailwind App (with Docker)
 
 A fast, minimal, and modern starter template using **Deno**, **Hono**, **JSX (server & client)**, and **TailwindCSS**, bundled with **Docker** for both development and production.
 
