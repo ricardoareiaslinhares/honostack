@@ -1,4 +1,6 @@
 import { FC } from "hono/jsx";
+import { Header } from "./components/Landing.tsx";
+import { Footer } from "./components/Footer.tsx";
 
 export const Layout: FC = (props) => (
   <html>
@@ -8,12 +10,11 @@ export const Layout: FC = (props) => (
       <link href="/static/styles.css" rel="stylesheet" />
     </head>
     <body>
-      <header>
-        <h1>🚀 Deno Hono JSX *server && client* Tailwind App</h1>
-      </header>
+      {/*    <Navbar /> */}
+      <Header />
       <main>{props.children}</main>
       <div id="root"></div>
-      <footer>© 2025, crafted by Ricardo Linhares</footer>
+      <Footer />
     </body>
   </html>
 );

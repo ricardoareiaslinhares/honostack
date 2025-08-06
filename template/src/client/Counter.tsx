@@ -1,5 +1,6 @@
 import { useState } from "hono/jsx";
 import { render } from "hono/jsx/dom";
+import Quotes from "./Components/Quotes.tsx";
 
 const Counter = () => {
   const [count, setCount] = useState(0);
@@ -13,13 +14,13 @@ const Counter = () => {
   );
 };
 
-const root = document.getElementById("root");
+const root = document.getElementById("quotes");
 console.log("root =>", root); // Delete
 
 if (root) {
   render(
     <>
-      <Counter />
+      <Quotes />
     </>,
     root,
   );
