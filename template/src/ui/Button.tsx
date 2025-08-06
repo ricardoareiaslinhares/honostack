@@ -16,12 +16,11 @@ export const Button = ({
   className = "",
 }: ButtonProps) => {
   const ghostVariant = `
-    py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg
-    bg-white text-blue-600 shadow-2xs hover:bg-gray-50 focus:outline-none
-    focus:bg-gray-50 active:translate-y-[1px] transition-all
-    disabled:opacity-50 disabled:pointer-events-none
-    dark:bg-neutral-800 dark:text-blue-500 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700
-  `;
+  py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg
+  bg-white text-blue-600 shadow-2xs hover:bg-gray-50 focus:outline-none transition-all
+  disabled:opacity-50 disabled:pointer-events-none
+  dark:bg-neutral-800 dark:text-blue-500 dark:hover:bg-neutral-700
+`;
 
   const solidVariant = `
 inline-block bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition"
@@ -31,7 +30,7 @@ inline-block bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-
       type={type}
       disabled={disabled}
       onClick={onClick}
-      class={`${variant === "solid" ? ghostVariant : solidVariant} ${className}`}
+      class={`${variant === "solid" ? solidVariant : ghostVariant} ${className}`}
     >
       {children}
     </button>

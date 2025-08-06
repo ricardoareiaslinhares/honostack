@@ -27,7 +27,7 @@ const quotes = [
   },
 ];
 
-export default function Quotes() {
+export const Quotes = () => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -71,4 +71,4 @@ export default function Quotes() {
       </div>
     </section>
   );
-}
+};

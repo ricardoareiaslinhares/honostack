@@ -3,7 +3,7 @@
     "hono": "jsr:@hono/hono@^4.8.12"
   },
   "tasks": {
-    "build:client": "deno bundle --platform browser --output public/static/bundle.js src/client/counter.tsx",
+    "build:client": "deno bundle --platform browser --output public/static/bundle.js src/client/App.tsx",
     "watch:client": "watchexec -e ts,tsx --restart --clear -- deno task build:client",
     "build:css": "tailwindcss -i ./src/layout.css -o ./public/static/styles.css",
     "watch:css": "watchexec -e ts,tsx --restart --clear -- deno task build:css",
